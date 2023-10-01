@@ -1,13 +1,27 @@
 import React from 'react';
-import {View} from 'react-native';
+import {ApiProvider} from './ApiProvider';
+import RootStackScreen from './navigation/StackNavigator';
+import {StyleSheet, View} from 'react-native';
 
 const App = () => {
-  return <View />;
+  return (
+    <ApiProvider>
+      <View style={styles.app}>
+        <RootStackScreen />
+      </View>
+    </ApiProvider>
+  );
 };
 
 export default App;
-
+const styles = StyleSheet.create({
+  app: {
+    flex: 1,
+  },
+});
 /*
+Todo: TextArea!
+Todo: The picture if the news array is empty!
 REQUIRED:
 Todo: directories structure
 Todo: stackNavigator(

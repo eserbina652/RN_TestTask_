@@ -1,12 +1,29 @@
 import React, {ReactNode} from 'react';
-import {TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Colors} from '../../styles';
 
 interface CircleBtnProps {
-  callback: () => void;
+  callback: () => void; //OnPress
   svg: ReactNode;
 }
 const CircleBtn = ({callback, svg}: CircleBtnProps) => {
-  return <TouchableOpacity onPress={callback}>{svg}</TouchableOpacity>;
+  return (
+    <View style={styles.btn_container}>
+      <TouchableOpacity onPress={callback}>{svg}</TouchableOpacity>
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  btn_container: {
+    padding: 8,
+    backgroundColor: Colors.MAIN,
+    borderRadius: 50,
+    width: 45,
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default CircleBtn;
