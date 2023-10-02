@@ -4,9 +4,13 @@ import CustomInput from '../components/inputs/CustomInput';
 import StandardBtn from '../components/btns/StandardBtn';
 import {Colors} from '../styles';
 import {useApiContext} from '../ApiProvider';
+import {useNavigation} from '@react-navigation/native';
+import {ScreenName} from '../constants';
+import TextArea from '../components/inputs/TextArea';
 
 const CreatePost = () => {
-  const {fetchData, data} = useApiContext();
+  const {postData} = useApiContext();
+  const navigation = useNavigation();
   const [formData, setFormData] = useState({
     title: '',
     text: '',
@@ -14,17 +18,11 @@ const CreatePost = () => {
     url: '',
   });
   const handleSubmit = () => {
-    fetchData({
-      method: 'POST',
-      body: {
-        ...formData,
-      },
-    });
+    postData(formData);
+    // @ts-ignore
+    navigation.navigate(ScreenName.HOME);
   };
 
-  // useEffect(() => {
-  //   console.log('Form data submitted:', data);
-  // }, [data]);
   return (
     <View style={styles.container}>
       <View>
@@ -46,12 +44,10 @@ const CreatePost = () => {
           inputValue={formData.url}
           style={styles.inputStyles}
         />
-        <CustomInput
+        <TextArea
           placeholder="Type your message here..*"
           onChange={text => setFormData({...formData, text: text})}
           inputValue={formData.text}
-          style={{...styles.inputStyles, height: 120, paddingVertical: 0}}
-          isArea={true}
         />
       </View>
       <StandardBtn

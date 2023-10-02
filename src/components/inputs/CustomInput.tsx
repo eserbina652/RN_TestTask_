@@ -1,31 +1,20 @@
 import React from 'react';
-import {StyleSheet, TextInput, View, ViewStyle} from 'react-native';
-import fonts from '../../assets/fonts';
+import {StyleSheet, TextInput, View} from 'react-native';
 import SearchSvg from '../../assets/svg/SearchSvg';
-import {Nullable} from '../../utils/types';
+import {InputProps} from './interface';
+import fonts from '../../assets/fonts';
 
-interface CustomInputProps {
-  placeholder: string;
-  inputValue: string;
-  onChange: (text: string) => void;
-  style?: Nullable<ViewStyle>;
-  isArea?: boolean;
-  isSearch?: boolean;
-}
 const CustomInput = ({
   placeholder,
   inputValue,
   onChange,
   style = null,
-  isArea = false,
   isSearch = false,
-}: CustomInputProps) => {
+}: InputProps) => {
   return (
     <View style={styles.container}>
       {isSearch && <SearchSvg />}
       <TextInput
-        multiline={isArea}
-        numberOfLines={isArea ? 4 : 1}
         style={[styles.text_light, style]}
         placeholder={placeholder}
         value={inputValue}
@@ -34,7 +23,10 @@ const CustomInput = ({
     </View>
   );
 };
-const styles = StyleSheet.create({
+
+export default CustomInput;
+
+export const styles = StyleSheet.create({
   text_light: {
     fontFamily: fonts.RobotoLight,
     fontSize: 16,
@@ -48,5 +40,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-export default CustomInput;

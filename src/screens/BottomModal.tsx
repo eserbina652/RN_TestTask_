@@ -1,16 +1,20 @@
 import React, {useCallback, useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 import StandardBtn from '../components/btns/StandardBtn';
 import {Colors} from '../styles';
+import {useApiContext} from '../ApiProvider';
 
 const BottomModal = () => {
   const navigation = useNavigation();
   const actionDone = useRef(false);
+  const {params} = useRoute<RouteProp<{params: {id: number}}>>();
+  const {deletePost} = useApiContext();
+
   const handleGesture = useCallback((evt: PanGestureHandlerGestureEvent) => {
     const {nativeEvent} = evt;
     if (nativeEvent.velocityY > 0 && !actionDone.current) {
@@ -18,13 +22,18 @@ const BottomModal = () => {
       actionDone.current = true;
     }
   }, []);
+
+  const onDelete = async (id: number) => {
+    await deletePost(id);
+    navigation.goBack();
+  };
   return (
     <PanGestureHandler onGestureEvent={handleGesture}>
       <View style={styles.container}>
         <View style={styles.modal}>
           <StandardBtn
             title="Delete"
-            onPress={() => navigation.goBack()}
+            onPress={() => onDelete(params?.id)}
             style={{backgroundColor: Colors.DELETE, marginTop: 15}}
           />
           <StandardBtn

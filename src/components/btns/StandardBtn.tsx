@@ -1,23 +1,18 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import {Colors} from '../../styles';
-import {Nullable} from '../../utils/types';
 import fonts from '../../assets/fonts';
 
-interface IStyle {
-  backgroundColor?: string;
-  marginTop?: number;
-}
 interface StandardBtnProps {
   title: string;
   disabled?: boolean;
   onPress: () => void;
-  style?: Nullable<IStyle>;
+  style?: ViewStyle;
 }
 const StandardBtn = ({
   title,
   disabled = false,
   onPress,
-  style = null,
+  style = {},
 }: StandardBtnProps) => {
   const btnStyle = disabled ? styles.disabled : styles.active;
   return (
@@ -34,7 +29,6 @@ const styles = StyleSheet.create({
   btn: {
     borderRadius: 10,
     width: 360,
-    // height: 80,
     paddingVertical: 14,
     alignItems: 'center',
     backgroundColor: Colors.ACTIVE,

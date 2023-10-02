@@ -12,7 +12,7 @@ export default ({title}: NavbarProps) => {
 
   return (
     <View style={[{justifyContent: 'center'}, styles.container]}>
-      <CircleBtn callback={() => navigation.goBack()} svg={<ArrowSvg />} />
+      <CircleBtn onPress={() => navigation.goBack()} svg={<ArrowSvg />} />
       <Text style={styles.title_semobold}>{title}</Text>
     </View>
   );
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     padding: 30,
     paddingRight: 170,
     textAlign: 'center',
-    // height: 48,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-between',

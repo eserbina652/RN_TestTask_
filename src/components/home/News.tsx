@@ -15,7 +15,7 @@ const News = ({news}: NewsProps) => {
 
   const openModal = () => {
     // @ts-ignore
-    navigation.navigate(ScreenName.BOTTOM_MODAL);
+    navigation.navigate(ScreenName.BOTTOM_MODAL, {id: news.id});
   };
   const calculateTimeSince = (timestamp: string): string => {
     const currentTime = new Date();
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   container: {
     marginBottom: 35,
-    width: 360,
+    width: 350,
     height: 304,
     borderRadius: 10,
   },
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
   },
   title_semobold: {
     fontFamily: fonts.RobotoBold,
-    // fontWeight: '600',
     fontSize: 20,
     lineHeight: 23,
     color: '#000',

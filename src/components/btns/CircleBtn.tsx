@@ -3,13 +3,13 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Colors} from '../../styles';
 
 interface CircleBtnProps {
-  callback: () => void; //OnPress
+  onPress: () => void;
   svg: ReactNode;
 }
-const CircleBtn = ({callback, svg}: CircleBtnProps) => {
+const CircleBtn = ({onPress, svg}: CircleBtnProps) => {
   return (
     <View style={styles.btn_container}>
-      <TouchableOpacity onPress={callback}>{svg}</TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>{svg}</TouchableOpacity>
     </View>
   );
 };
